@@ -66,6 +66,7 @@ const handleTransactionSubmitted = (transactionData) => {
     text: transactionData.text,
     amount: transactionData.amount,
   });
+  saveTransactionToLocalStorage()
   toast.success("Add Expenses Complete");
   // console.log(generateUniqueId())
 };
@@ -81,6 +82,12 @@ const handleTransactionDeleted = (id) => {
   transactions.value = transactions.value.filter(
     (transaction) => transaction.id !== id
   );
+  saveTransactionToLocalStorage()
   toast.success("Delete Transaction Complete");
+};
+
+//Save to localStorage
+const saveTransactionToLocalStorage = () => {
+  localStorage.setItem("transactions", JSON.stringify(transactions.value));
 };
 </script>
